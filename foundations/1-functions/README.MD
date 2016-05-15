@@ -44,7 +44,7 @@ We could use functions to write something a bit more reusable. Let's look at how
 
 There are two ways to write functions. We will discuss when one is better to use than the other but for the moment you can use whichever you prefer.
 
-####### Named functions - type 1
+###### Named functions - type 1
 ```javascript
 function addNumbers() {
 	var result = 5 + 10;
@@ -59,7 +59,7 @@ Let's look at the anatomy ( known as the signature ) of this function.
 * the {} are known as a 'block'. This is what goes round the list of commands we want to run
 * The rest is up to us! We write our list of things we want our function to do.
 
-####### anonymous functions - type 2
+###### anonymous functions - type 2
 
 We looked at variables in a previous lesson. Variables can store numbers, arrays, strings and objects. But they can also store functions that have no name! These are called anonymous functions. This is great because then we can pass functions around the same way we use variables. Here is the same function stored in a variable
 
