@@ -68,14 +68,14 @@ var addNumbers = function() {
 	var result = 5 + 10;
 }
 ```
-As far as javascript is concerned these are both exactly the same. They are use the same way. They are simply different ways of writing the same thing.
+As far as javascript is concerned these are both exactly the same. They are used the same way. They are simply different ways of writing the same thing.
 
 
 > NOTE: camelCase is one way of writing words in script that makes them look neater if your variable or function name has more than one word. Make the first letter lowercase then capitalise the start of every other word. **camelCaseIsCoolAndMakesThingsEasierToRead**
 
 ### Calling functions
 
-So far we've only ***written*** our function. It's sitting there waiting to be used. But it hasn't been used yet! To use a functions we "call" it or "run" (either terminolgy is fine). Here's how to call the function we just wrote. 
+So far we've only ***written*** our function. It's sitting there waiting to be used. But it hasn't been used yet! To use a function we "call" it or "run" (either terminolgy is fine). Here's how to call the function we just wrote. 
 
 ```javascript
 addNumbers();
@@ -83,7 +83,7 @@ addNumbers();
 
 Adding the parentheses to the name tells javascript to call our function and do all the actions we wrote inside it. This works exactly the same for anonymous and named functions too!
 
-> EXERCISE: Take 10 minutes and try writing a few functions and calling them.
+> EXERCISE: 10 Minutes - try writing a few functions and calling them.
 > Use console.log() as a good way to show what each function is doing.
 > For example 
 
@@ -93,12 +93,12 @@ function sayHello() {
 } 
 ```
 
-**Question: How useful is the addNumbers we have written? How could they be improved?**
+**Question: How useful is the addNumbers function we have written? How could it be improved?**
 ***
 
 ### Parameters
 
-Hopefully your answers to the question above is "Not very useful". Unless we want to add the same two numbers every time it's pretty useless in fact. So how can we make it more generic? We can use parameters. Parameters are basically variables that belong to a function. When we call the function we can choose what goes in to the function and therefor change what they do. Here's the addNumbers function made more useful.
+Hopefully your answers to the question above is "Not very useful". Unless we want to add the same two numbers every time it's pretty useless in fact. So how can we make it more generic? We can use parameters. Parameters are basically variables that belong to a function. When we call the function we can choose what goes in to the parameters and therefore change what the function does. Here's the addNumbers function made more useful.
 
 ```javascript
 function addNumbers(number1 , number2) {
@@ -126,7 +126,7 @@ addNumbers(10,30);
 
 ### Returns
 
-At the moment our function is slightly more reusable. But what if I actually want to DO something with var result. Well, var result only exists inside our function and unfortunately it disappears as soon as the function is finished running. So once again our funciton is pretty useless. We need a way to get var result OUT of the function. For that we can use the **return** keyword.
+At the moment our function is slightly more reusable. But what if I actually want to DO something with var result. Well, var result only exists inside our function and unfortunately it disappears as soon as the function is finished running. So once again our function is pretty useless. We need a way to get var result OUT of the function. For that we can use the **return** keyword.
 
 ```javascript
 function addNumbers(number1 , number2) {
@@ -147,7 +147,7 @@ function addNumbers(number1 , number2) {
 }
 ```
 
-Now when we call the function we can use the result that comes back. Like this
+Now when we call the function we can use the result that comes back.
 
 ```javascript
 var answer1 = addNumbers(1 , 3)
@@ -184,7 +184,7 @@ console.log(4);
 
 This idea of swapping may seem simple but it will really help when we look at "nested function calls" like this. 
 
-> EXERCISE: In pairs try and figure out what answer1 would equal in the following code.
+> EXERCISE: 10 Minutes - In pairs try and figure out what answer1 would equal in the following code.
 > HINT: You must always start from the inner most brackets first and work out. Just like in maths.
 > Write out all the steps that javascript would go through.
 
