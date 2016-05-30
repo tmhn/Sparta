@@ -6,7 +6,7 @@ This lesson should take between 60 and 90 minutes to complete.
 
 ## Pre-requisites
 
-* Lesson 1  - Variables
+* Variables
 
 ## This lesson covers
 
@@ -203,11 +203,7 @@ You just:
 * Learned how to use parameters to make a function more generic
 * Learned how to return a value from your function
 * Learned how to evaluate functions and what is really going on behind the scenes
-* Learend how to write in camelCase to make things neater and easier to read
-
-## Up next
-
-Scope. Deciding what is available inside a function and what isn't.
+* Learned how to write in camelCase to make things neater and easier to read
 
 
 
