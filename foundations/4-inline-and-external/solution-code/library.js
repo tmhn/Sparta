@@ -1,0 +1,5 @@
+function sayHello() {
+
+  alert('hello');
+
+}
