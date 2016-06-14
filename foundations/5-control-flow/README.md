@@ -15,7 +15,6 @@ This lesson should take between 60 and 90 minutes to complete.
 * if/else
 * Comparisons and logical operators
 * Truthy/Falsey
-* Switch
 
 ***
 
@@ -27,15 +26,15 @@ This is where control flow comes in.
 
 ## Making decisions with booleans
 
-We saw in the data types lesson that booleans can have on of two values, true or false. Booleans are the data types that we use for making decisions. 
+We saw in the data types lesson that booleans can have one of two values, true or false. Booleans are the data type that we use for making decisions. 
 
-Luckily for us control flow reads very much like english when we get the code right. So let's start with a real world example and try and turn it in to real code.
+Luckily for us control flow reads very much like english when we get the code right. So let's start with a real world example and try to turn it in to real code.
 
-> You don't know if you can afford to buy another drink. You decide that you will if you have more than 10 pounds in your pocket. If not you should really go home.
+> You don't know if you can afford to buy another drink. You decide that you ***will***, if you have more than 10 pounds in your pocket. If not, you should really go home.
 
 What could this decision look like written in plane english? 
 
-"If the money in my pocket is greater than 10 then I'll buy another drink. Otherwise I'll go home."
+"If the money in my pocket is greater than 10 pounds then I'll buy another drink. Otherwise I'll go home."
 
 Let's try and translate real life in to code. Open the starter code in sublime.
 
@@ -43,14 +42,14 @@ Let's try and translate real life in to code. Open the starter code in sublime.
 
 ### If
 
-In the above example we used the word if to show that we had a decision to make. Luckily for us most languages do aswell. It looks like this. 
+In the above example we used the word "if" to show that we had a decision to make. Luckily for us most programming languages do aswell. It looks like this. 
 
 ```javascript
 if ( thingToTest ) {
 	// code to run if thingToTest is true
 }
 ```
-The curvey brackets () contain the test. If what we put in there evaluates ( simplifies down ) to be true then the code in the curly brackets {} will be run. Copy the following in to the flow.js file.
+The curvy brackets () contain the test. If what we put in there evaluates ( simplifies down ) to be true then the code in the curly brackets {} will be run. Copy the following in to the flow.js file.
 
 ```javascript
 var money_in_my_pocket = 20;
@@ -74,13 +73,13 @@ Reload the page and look in the console. You should see that our friend is going
 
 ### Else
 
-Have a look back at our decision we wrote in plain english. We have accounted for the word if. But is the other important word used?
+Have a look back at our decision we wrote in plain english. We have accounted for the word "if". But what is the other important word?
 
 We said:
 
 ***Otherwise I'll go home.***
 
-This is what happens if our check was NOT true. In other words if it was false. Let's try to model this too. For this we us the "else" keyword.
+This is what happens if our check was NOT true. In other words if it was false. Let's try to model this too. For this we use the "else" keyword.
 
 Copy the following to the end of your flow.js file
 
@@ -164,6 +163,10 @@ So far we have only used one operator to perform a check. We compared two number
 10 > 5
 => true
 
+// not ( flip the value )
+false == !true
+=> true
+
 // less than
 1 < 3
 => true
@@ -175,7 +178,7 @@ So far we have only used one operator to perform a check. We compared two number
 1 == 1
 => true
 
-// not equals
+// does not equal
 1 != 1
 => false
 
@@ -237,7 +240,7 @@ true && false
 
 OR is written with two "pipes" likes this ||. They can be thought of like this:
 
-""If the expression on the left is true OR the expression on the right is true, the the whole thing becomes true."
+"If the expression on the left is true OR the expression on the right is true, the the whole thing becomes true."
 
 Try out the following in the console
 
@@ -251,6 +254,9 @@ true || false
 false || true
 => true
 
+false || !true
+=> false
+
 false || false
 => false
 
@@ -263,6 +269,9 @@ false || false
 1 != 1 || 2 > 3
 => false
 ```
+
+#### Putting it all together
+
 
 > EXERCISE ( 20 Minutes ) : Update our example in the flow.js to include the following conditions :
 > "If I have more than 10 pounds in my pocket AND I've had fewer than three drinks I'll buy another drink. If I have more than 5 pounds OR the crisps are free I'll buy some crisps. Otherwise I'll go home.
@@ -290,12 +299,11 @@ if (money_in_my_pocket > 10 && drinks_drunk < 3) {
 
 You just:
 
-* Learned how to use inline scripts ( and that you shouldn't ever )
-* Learned how to put scripts in the head.
-* Learned how to put scripts in the body to wait for the page to load first.
-* Learned how to pull in external scripts. This is the best thing to do.
-* Learned that scripts must load and run before they continue. So be careful with blocking.
-* Learned that order is important when loading scripts!
+* Saw how to use if and else to make decision on what code should be run
+* Used if else to chain lots of tests together
+* Learned how to use booleans to write real life questions in code
+* Used || ( Or ), && ( And ) , > ( Greater than ) , < ( Less than ) and a few others to test for different situations
+
 
 
 
