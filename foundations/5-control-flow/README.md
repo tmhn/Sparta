@@ -14,7 +14,7 @@ This lesson should take between 60 and 90 minutes to complete.
 * Making decisions with booleans
 * if/else
 * Comparisons and logical operators
-* Truthy/Falsey
+* Switch
 
 ***
 
@@ -294,6 +294,62 @@ if (money_in_my_pocket > 10 && drinks_drunk < 3) {
 }
 ```
 
+## Switch statement
+
+There is another way to make decisions in javascript. The switch statement. The switch statement takes a value and then tries to match it to the "cases" you've given it. You can easily use if and else to perform the same task but the switch is neat and works very well in certain situations. Let's look at the same example done with both if/else and switch.
+
+Switch can only perform one comparison. The explicit equals ( === ).
+
+```javascript
+
+	// if else version
+	var name = "tim";
+	
+	if ( name === "bob" ) {
+		console.log('hi bob');
+	} else if ( name === "tim" ) {
+		console.log('hi tim');
+	} else if ( name === "steve" ) {
+		console.log('hi steve');
+	} else {
+		console.log('hi default person');
+	}
+	
+	// switch version
+	switch (name) {
+	
+		case "bob" :
+		
+			console.log('hi bob');
+		
+			break;
+			
+		case "tim" :
+		
+			console.log('hi tim');
+	
+			break;
+			
+		case "steve" :
+		
+			console.log("hi steve");
+			
+			break;
+			
+		default:
+		
+			console.log("hi default person");
+	
+	}
+
+```
+
+Notice the break statements. These are necessary in a switch. If you leave them out every case after the one that matches will run aswell. Take out the break from the tim case and run it again. You'll see that it matches tim and then runs the steve code as well. 
+
+Also remember that the switch uses the === to compare. So 5 will NOT match "5"! Be careful with your data types!
+
+You can make up your mind which you prefer.
+
 
 ## Summary
 
@@ -303,6 +359,7 @@ You just:
 * Used if else to chain lots of tests together
 * Learned how to use booleans to write real life questions in code
 * Used || ( Or ), && ( And ) , > ( Greater than ) , < ( Less than ) and a few others to test for different situations
+* Saw an alternative to if/else in the switch statement
 
 
 

@@ -1,4 +1,4 @@
-# Control Flow Lab
+# Control Flow Exercise
 
 ## Use control flow to create a calculator
 
