@@ -8,6 +8,7 @@ This lesson should take between 60 and 90 minutes to complete.
 
 * Variables
 * Arrays
+* Object Basics
 * Booleans
 * Truthy/Falsey
 
@@ -137,11 +138,91 @@ i++;
 
 ```
 
+## While loops
+
+The while loop is the simplest loop there is. It keeps running until a test we give it returns false. The loop checks the test first then decides whether to run or not. It looks like this:
+
+```javascript
+var i = 0;
+
+while ( i < 5 ) {
+	
+	console.log('this loop has run ' + i + ' times');
+
+}
+```
+
+The loop tests for i < 5 each time. As soon as it's false the loop stops. 
+
+
+> QUESTION ( 5 Minutes ) : As it stands will this loop ever stop?
+
+Hopefully you have spotted that because i never changes i < 5 will always be true. So the loop carries on forever. This is called an "infinite loop". It's a great way to crash your browser too. Let's fix it.
+
+```javascript
+var i = 0;
+
+while ( i < 5 ) {
+	
+	console.log('this loop has run ' + i + ' times');
+	i++;
+}
+```
+
+We tend to use for loops when we have a fixed number of loops we want to run. The while loop is better when we're waiting for something to be true. Although you can easily use either of them in both situations.
+
+## The do while loop
+
+The do while loop is the same as the while loop with one difference. The while loop checks first then decides if it will run the loop. This means that it's possible to have a while loop that doesn't run at all if the condition starts out as false.
+
+The do while loop ensures that at least one iteration of the loop will run before checking the condition.  It looks like this:
+
+```javascript
+var number;
+do {
+
+	number = Math.random(); // random number
+	console.log(number); // this will definitely run at least once
+
+} while ( number < 0.5 );
+```
+
+## The for in loop
+
+The for in loop is the least commonly used of the loops. It works on objects and their properties. You may remember from the objects lesson that an object can have properties. These are key/value pairs. The key is what we use to ask an object for a value.
+
+```javascript
+
+var myobject = new Object();
+
+// myobject.key = value
+myobject.a = "1";
+myobject.b = "2";
+myobject.c = "3";
+
+```
+
+The for in loop gives you each of the ***keys*** in term for an object that we give it. It looks like this.
+
+```javascript
+for(var key in myobject) {
+
+	console.log(key); // a , b , c
+	console.log(myobject[key]) // "1" , "2" , "3"
+
+}
+```
+
+Try this one out for yourself in the console. Notice we use the array style notation to get the value out of the object. This is perfectly acceptable and is another way of getting the property value from an object.
+
 ## Summary
 
 You just:
 
-* How to use a for loop to work on every element in an array
+* Learned how to use a for loop to work on every element in an array
+* Learned how and when to use a while loop
+* Saw that the do while loop runs at least once
+* Used the rarer for in loop to get all the property keys from an object
 
 
 
