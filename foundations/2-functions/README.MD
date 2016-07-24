@@ -13,6 +13,7 @@ This lesson should take between 60 and 90 minutes to complete.
 * What is a function
 * Writing basic functions ( in two different ways )
 * Calling functions
+* Hoisting
 * Parameters
 * Returns
 * Evaluating
@@ -95,6 +96,34 @@ function sayHello() {
 
 **Question: How useful is the addNumbers function we have written? How could it be improved?**
 ***
+
+### Hoisting
+
+Some languages, including javascript, have a useful feature called hoisting. It allows us to write functions in any order in the code but use them at any time. Here's an example to explain.
+
+```javascript
+function makeNoise() {
+	
+	alert("how annoying");
+
+}
+
+makeNoise();
+```
+
+This example is no different from those we've seen before. The function makeNoise is declared before we try to use it. This makes sense. Hoisting allows us to do the following.
+
+```javascript
+makeNoise();
+
+function makeNoise() {
+	
+	alert("how annoying");
+
+}
+```
+
+Javascript scans the code for functions at the start and "hoists" them to the top of the code. This means we can, if we choose, write all our functions at the end of our script and use them at the top.
 
 ### Parameters
 
@@ -209,7 +238,6 @@ You just:
 
 
  
-
 
 
 

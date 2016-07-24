@@ -15,7 +15,6 @@ This lesson should take between 60 and 90 minutes to complete.
 * Lexical Scope
 * Nested functions
 * Global Scope
-* Private ( Faking it )
 
 ***
 
@@ -129,7 +128,7 @@ joinStringsAndPrint( string1 , string2 );
 
 Here you can see that the printString function is defined ***inside*** the joinStrings function. This is called nesting. printString is a nested function. For nested functions scope works the same way. It can see out but other things cannot see in. It can also see out to all the levels above it. That means that printString can see everything at the top level too.
 
-> DISCUSSION: 5 ( Mins ) Which of the commented lines below do you think will work? Discuss then uncomment them to test them.
+> DISCUSSION: 10 ( Mins ) Which of the commented lines below do you think will work? Discuss then uncomment them to test them.
 
 ```javascript
 
@@ -173,11 +172,11 @@ You can have functions nested in functions nested in functions, to as many level
 
 Anything that we create outside of any functions at the top level of our file is said to be in the global scope. This means that it is availble everywhere as we saw in the nested example. In other words it's globally available.
 
-Global variables are extremely useful but also ***extremely*** bad practise. The reasons for this iare simple. 
+Global variables are extremely useful but also ***extremely*** bad practise. The reasons for this are simple. 
 
 1. If your global variable can be seen from anywhere it can be changed from anywhere. 
 2. As your app gets to be more complex this gets harder to keep track of
-3. It makes are functions and objects much less reusable as we have introduced what is a called a "dependency". It relies on something that is provided elsewhere
+3. It makes our functions and objects much less reusable as we have introduced what is a called a "dependency". It relies on something that is provided elsewhere
 
 Nonetheless in your first attempts at building apps it is ok to use globals until you see some of the ways we can avoid them.
 
@@ -197,14 +196,15 @@ You can also define a global from inside any function by omitting the ***var*** 
 
 ```
 
+
 ## Summary
 
 You just:
 
-* Learned how to use a for loop to work on every element in an array
-* Learned how and when to use a while loop
-* Saw that the do while loop runs at least once
-* Used the rarer for in loop to get all the property keys from an object
+* Saw that Lexical Scope allows code to see out but not in
+* Learned how to use nested functions
+* Saw that global variables are available everywhere
+* Learned some reasons why you shouldn't use globals
 
 
 
