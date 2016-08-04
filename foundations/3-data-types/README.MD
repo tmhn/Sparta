@@ -83,15 +83,11 @@ Another type of collection. ( covered later )
 Variables would be pretty useless if we couldn't do things to them. We can use symbols called operators to act on variables. They do different things depending on the data type. Not all operators will work on every data type. The operators we have available are as follows:
 
 ```javascript
+= ( assign ) 
 + ( add )
 - ( subtract )
 / ( divide ) 
 * ( multiply )
-= ( assign ) 
-== ( comparison )
-=== ( strict comparison )
-&& ( and )
-|| ( or )
 %  ( modulus )
 ```
 

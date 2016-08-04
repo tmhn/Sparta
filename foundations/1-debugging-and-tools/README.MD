@@ -61,7 +61,7 @@ The console.log command allows us to print something to the console. Notice that
 
 #### alert
 
-Alert is a pretty old way of getting the users attention. It really should be used anymore in modern websites but it still is. It can be good for debugging because it stops the code from running until the alert is clear. Plus it's pretty funny. Try this:
+Alert is a pretty old way of getting the users attention. It really shouldn't be used any more in modern websites. But it still is. It can be good for debugging because it stops the code from running until the alert is cleared. Plus it's pretty funny. Try this:
 
 ```javascript
 alert('bang!');
