@@ -110,6 +110,8 @@ They are really easy to create in javascript as they are just normal functions. 
 
 The following example creates the same type of object that we had before but instead of adding the properties to the instance we add them to the blueprint. Now every instance will have the same properties and methods.
 
+> NOTE : We'll explain what "this" means in a bit
+
 ```javascript
 var Person = function() {
 	
@@ -175,7 +177,7 @@ It allows us to access the properties that are on that particular instance. This
 
 ### JSON
 
-JSON Stands for JavaScript Object Notation. It is a very quick way to create a single object. JSON has become one of the most popular ways of sending data over the internet because it's simple and easy to read. So it's a very important one to learn. 
+JSON Stands for JavaScript Object Notation. It is a very quick way to create an instance of an object without needing a blueprint. JSON has also become one of the most popular ways of sending data over the internet because it's simple and easy to read. So it's a very important one to learn. 
 
 It directly creates an instance without using a blueprint but we can add properties and methods right from the outset. Once it's created it's just like any other object instance.
 
