@@ -86,7 +86,7 @@ PROPFIND
 VIEW
 ```
 
-Luckily for us we won't use most of them. Different architectures will use these verbs differently but in REST we really only use four or five. And they are should match up to specific actions:
+Luckily for us we won't use most of them. Different architectures will use these verbs differently but in REST we really only use four or five. And they should match up to specific actions:
 
 ```
 GET - Show me the resource at this location
@@ -96,7 +96,7 @@ PATCH - Similar if not the same as PUT. Update a resource. There is a subtle dif
 DELETE - Destroy the resource at this location
 ```
 
-Browsers can only send two of these verbs. GET and POST. When you type in a url and hit enter it is, by default, a GET request. If you type information in to a form and hit send it will usually send a POST request. But it can also be a GET request.
+Browsers can only send two of these verbs. GET and POST. When you type in a url and hit enter it is, by default, a GET request. If you type information in to a form and hit send it will usually send a POST request. But it can also be a GET request. This will be important in the node course.
 
 One thing you may have noticed from this is that using the verbs means that we can send a different verb to the same url to get a different response. One may show an object for example and the other may delete it.
 
@@ -110,7 +110,7 @@ Because a route is made up of a verb and a url you can't change the verb without
 
 Let's try the same thing with a real API rather than a website. This is an example API some nice people have made available for us to test with.
 
-Copy the following link into your address bar in Postman and change the verb back to GET
+Copy the following link into your address bar in Postman and change the verb back to GET.
 
 https://jsonplaceholder.typicode.com/posts
 
@@ -126,19 +126,19 @@ We usually use them for sending login details or tokens to a route to identify w
 
 This is really important if we want to restrict who can use our API.
 
-In postman you should see a tab just below the url that says headers. Open that tab and you should see a place to add key value pairs. We don't need any right now. But add some to see how it works. The API should ignore them.
+In Postman you should see a tab just below the url that says 'headers'. Open that tab and you should see a place to add key value pairs. We don't need any right now. But add some to see how it works. The API should ignore them.
 
 ![Postman Headers](postman-headers.png)
 
 ### Request Body
 
-We can also send more complex data in the body of the request too. This could be an image that we're uploading, some JSON data, some simple text, some data from a form. Headers are more for configuartion but that body data is where we send the real stuff.
+We can also send more complex data in the body of the request too. This could be an image that we're uploading, some JSON data, some simple text, some data from a form. Headers are more for configuartion but the body data is where we send the real stuff.
 
 What you send will depend on the API and how the developers have decided to set it up.
 
 One thing to notice is that Postman has greyed out the body area. This is because body data can only be sent with POST, PUT and PATCH verbs.
 
-Switch to POST and open the body tab. You should see at the top some options for  how you want the form to encode the data. This is not as complex as it seems. Data can be wrapped up in a few different ways before it's sent. These are our options.
+Switch to POST and open the body tab. You should see at the top some options for  how you want the form to encode the data. This is not as complex as it seems. Data can be wrapped up in a few different ways before it's sent. There are four options.
 
 Most requests we make will be x-www-form-encoded unless we want to upload files. So select that now.
 
@@ -155,7 +155,7 @@ When you make a request to server you're hoping for a response. A response can b
 
 ### HTTP Status Code
 
-These are really simple numbered codes that get sent with the response to tell us how successfuly the request was. There are tonnes of them for different purposes. 
+These are really simple numbered codes that get sent with the response to tell us how successfull the request was. There are tonnes of them for different purposes. 
 
 You've very definitely all seen one status code already. When you try to load a web page that can't be found you get a 404 error. 404 is a status code that literally means "Not Found".Your browser interprets this and shows you a 404 page.
 
