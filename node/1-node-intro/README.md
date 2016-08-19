@@ -15,9 +15,9 @@ This lesson should take between 45 and 60 minutes to complete.
 * The node console
 * Your first node app
 
-This module introduces you to server side/backend development. So far all the code we've written has run in the user's browser. It's been great for making changes to a page and for communicating with servers. But that is only half the story. We are now going to write code that determins what the browser get's sent in the first place! 
+This module introduces you to server side/backend development. So far all the code we've written has run in the user's browser. It's been great for making changes to a page and for communicating with servers. But that is only half the story. We are now going to write code that determines what the browser gets sent in the first place! 
 
-We will use code to ***change*** the HTML ***before*** it is sent to the user's browser. We will be accessing databases too so we can make things that persist for longer than the browser is open. And we will be using it to build our ***own*** APIs.
+We will use code to ***create*** the HTML ***before*** it is sent to the user's browser. We will be accessing databases too, so we can make things that persist for longer than the browser is open. And we will be using it to build our ***own*** APIs.
 
 I said right at the start of the course that javascript was written to run in the browser. Well, because of this it became a very popular language. But unforunately it couldn't be used to write server side code. So developers had to learn another language aswell to do this.
 
@@ -149,6 +149,8 @@ say.speak("Hi, This is about as basic as node script can be. Hope you enjoy it. 
 ```
 
 We can now use the say object to speak our message. Again it is important to note that this is someone else's code! What it does and how to use it is up to them. Make sure you read the docs!
+
+In this case the say object has a method called speak. This will interact with our hardware to turn the text in to speech and then send it to the speakers. Pretty cool. And we don't event need to know how it does it to be able to use it.
 
 Now we can run our script as normal with:
 
