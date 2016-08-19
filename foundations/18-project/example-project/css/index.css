@@ -1,0 +1,47 @@
+body, html, #wrapper {
+
+  height:100%;
+  width:100%;
+
+}
+
+
+#film {
+
+  width:100%;
+  text-align:center;
+
+}
+
+#film #poster {
+
+  width:50%;
+  filter:blur(50px);
+  -webkit-filter:blur(50px);
+
+}
+
+#spacers {
+
+  margin-bottom:50px;
+
+}
+
+#spacers span {
+
+  padding:10px;
+  margin:10px;
+
+}
+
+.underline {
+
+  border-bottom:3px solid #000;
+
+}
+
+#controls {
+
+  margin-top:100px;
+
+}

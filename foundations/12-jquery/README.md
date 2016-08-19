@@ -214,6 +214,8 @@ $(todos).each(function(index, todo) {
 
 });
 
+```
+
 Now let's look at what jQuery elements can do.
 
 ## jQuery elements
