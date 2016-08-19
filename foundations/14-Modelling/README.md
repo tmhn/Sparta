@@ -39,7 +39,7 @@ These three rules will help you to do just that.
 
 #### Reusability
 
-Your objects should be reusable. Which means that if you want to copy the code for them in to another project you shouldn't have to change them too much if at all to make them fit. The easiest way to achieve this is to make your objects solve small single problems rather than a bunch of different problems.
+Your objects should be reusable. Which means that if you want to copy the code for them in to another project you shouldn't have to change them too much, if at all, to make them fit. The easiest way to achieve this is to make your objects solve small single problems rather than a bunch of different problems.
 
 Here's an example of code that's not very reusable ( i.e really terrible ):
 
