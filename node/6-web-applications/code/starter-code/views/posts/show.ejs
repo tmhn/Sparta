@@ -1,0 +1,10 @@
+<h1><%= post.title %></h1>
+
+<p><%= post.body %></p>
+
+<form method="POST" action="/<%= post.id %>">
+  <button type="submit">Delete</button>
+  <input type="hidden" name="_method" value="DELETE">
+</form>
+
+

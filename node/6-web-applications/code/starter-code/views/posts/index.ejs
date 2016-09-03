@@ -1,0 +1,7 @@
+<h1>Posts</h1>
+
+<% for(var i = 0; i < posts.length; i++) { %>
+  <h3><a href="/<%= posts[i].id %>"><%= posts[i].title %></a></h3>
+  <p><%= posts[i].body %></p>
+  <a href="/<%= posts[i].id %>/edit">edit</a>
+<% } %>
