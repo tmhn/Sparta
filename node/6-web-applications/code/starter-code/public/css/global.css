@@ -1,0 +1,43 @@
+body {
+
+  padding:50px;
+  font-family:"Helvetica" , Arial;
+
+}
+
+h1,h2,h3,h4,h5,h6 {
+
+  color: rgba(149, 163, 179, 1);
+
+}
+
+p {
+
+  font-size:1.5em;
+
+}
+
+nav ul {
+
+  list-style: none;
+  padding:0px;
+  margin:0px;
+
+}
+
+/*$color2: rgba(171, 250, 169, 1);
+$color3: rgba(149, 163, 179, 1);
+$color4: rgba(76, 44, 105, 1);
+$color5: rgba(66, 37, 59, 1);*/
+
+nav li {
+
+  display:inline-block;
+
+}
+
+a {
+
+  color: rgba(66, 37, 59, 1);
+
+}

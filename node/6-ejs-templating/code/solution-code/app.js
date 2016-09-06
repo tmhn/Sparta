@@ -2,14 +2,11 @@ var express = require('express');
 var app = express();
 var layouts = require('express-ejs-layouts');
 var methodOverride = require('method-override')
-var postsController = require('./controllers/posts.js');
 var bodyParser = require('body-parser');
+var routes = require('./config/routes');
 
 // tell express to use ejs for rendering templates
 app.set('view engine' , 'ejs');
-
-// check for static files first before all routes
-app.use(express.static("public"));
 
 // use express layouts middleware too
 app.use(layouts);
@@ -28,16 +25,6 @@ app.use(methodOverride(function(req, res){
   }
 }));
 
-// routes pointed at our exported controller functions
-app.get("/" , postsController.index);
-app.get("/new" , postsController.new);
-app.get("/:id" , postsController.show);
-app.get("/:id/edit" , postsController.edit);
-app.delete("/:id" , postsController.delete);
-app.put("/:id" , postsController.update);
-app.post("/" , postsController.create);
-
-
 app.listen(3000 , function(){
-  console.log('app is listening on port 3000');
+  console.log('listening on port 3000');
 });

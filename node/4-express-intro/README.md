@@ -17,11 +17,11 @@ This lesson should take between 60 and 90 minutes to complete.
 
 Our node apps have been painfully simple so far. They haven't done much more than say a few words or print a few things to the screen. We're learning to be web developers and so far with node we haven't built anything for the web! This is where express comes in.
 
-Express is a node package just like all the others we've used. It's code written by other people for us to use. It's goal is to make it easier to build web applications, to respond to requests, to return responses and many many other things. Express can also create us a server that will listen for incoming requests. So it does an awful lot for us. 
+Express is a node package just like all the others we've used. It's code written by other people to make things easier. It helps us to respond to requests, to return responses and many many other things. Express can also create us a server that will listen for incoming requests. So it does an awful lot for us. 
 
 When a package makes it easier to perform a collection of similar tasks it is called a framework. Express is a web framework. So it makes it easier for us to build web applications.
 
-In this lesson we'll install express and get it to spin up a server for us and listen for a simple incoming request.
+In this lesson we'll install express and get it to spin up a server for us and listen for an incoming request.
 
 ## Installing express
 
