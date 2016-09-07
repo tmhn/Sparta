@@ -64,7 +64,8 @@ We need a directory to hold our views ( templates ). We'll also need a template 
 
 ```bash
 mkdir views
-touch views/index.ejs
+mkdir views/posts
+touch views/posts/index.ejs
 ```
 
 > IMPORTANT : EJS looks for templates in the views directory by default. It can be changed but make sure you call your directory "views" otherwise.
@@ -80,6 +81,10 @@ Let's open index.ejs and add some basic html:
   <title>Homepage</title>
 </head>
 <body>
+	<nav>
+	  <a href="/">Posts</a>
+	  <a href="/new">New Post</a>
+	</nav>
    <h1>Welcome to the homepage</h1>
 </body>
 </html>
@@ -87,19 +92,20 @@ Let's open index.ejs and add some basic html:
 
 ### Rendering
 
-Now we need to create our homepage route and render this template. In the app.js type the following:
+Let's change our index controller function to render this template. Open the posts.js controller and change the following:
 
 ```javascript
-app.get("/" , function(req,res) {
-	
-	res.render("index");
-	
-});
+// INDEX - GET /
+function indexPost(req , res) {
+
+  res.render("posts/index");
+
+}
 ```
 
 Previously, we've use res.send to return a response. But now, thanks to EJS, we have a new method called render. 
 
-This render method does a few things. Firstly, it will look in the default templates directory ( views ) for a file called "index.ejs". It knows that it will be an ejs file so we can leave that part off. It then reads that file and turns it in to HTML. Finally it returns the HTML as a response.
+This render method does a few things. Firstly, it will look in the default templates directory ( views ), inside the posts directory, for a file called "index.ejs". It knows that it will be an ejs file so we can leave that part off. It then reads that file and turns it in to HTML. Finally it returns the HTML as a response.
 
 Start your application and point your browser at:
 
@@ -107,9 +113,32 @@ Start your application and point your browser at:
 
 You should see your html rendered on the screen! 
 
-### Template variables
+### Data
 
-But we still have a small problem. It's still a totally static page. We might as well have just returned an HTML file instead! We want some dynamic stuff in there. 
+Before we do anything we'll need some data for our posts so we can render them. This is where Models would normally come in. But for the moment we'll just cheat because we haven't looked at models yet. Add an array of objects right at the top of your post.js controller:
+
+```javascript
+// Haven't looked at real models yet so for now we'll use this array
+var posts = [{
+  id: 0,
+  title: "Post 1",
+  body: "This is the first post"
+},
+{
+    id: 1,
+    title: "Post 2",
+    body: "This is the second post"
+},
+{
+    id: 2,
+    title: "Post 3",
+    body: "This is the third post"
+}];
+
+```
+
+### Template variables
+So far we still have a totally static page. We might as well have just returned an HTML file instead! We want some dynamic stuff in there. 
 
 Let's create some placeholders for dynamic data. In the index.ejs file add the following:
 
@@ -117,11 +146,12 @@ Let's create some placeholders for dynamic data. In the index.ejs file add the f
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Homepage</title>
+  <title><%= title %></title>
 </head>
 <body>
 	<nav>
-		Welcome back, <%= username %>
+	  <a href="/">Posts</a>
+	  <a href="/new">New Post</a>
 	</nav>
 	
    <h1>Welcome to the homepage</h1>
@@ -129,31 +159,51 @@ Let's create some placeholders for dynamic data. In the index.ejs file add the f
 </html>
 ```
 
-The tags around "username" are sometimes called ice cream cones. Different templating engines use different things to say "hey, this bit isn't HTML. You need to render this". EJS uses the cones. 
+The tags around "title" are sometimes called ice cream cones. Different templating engines use different things to say "hey, this bit isn't HTML. You need to render this". EJS uses the cones. 
 
-Notice the equals sign. The equals sign tells the render to insert the value of the username variable at that spot. We'll look at the other types of cones in a minute.
+Notice the equals sign. The equals sign tells the render to insert the value of the title variable at that spot. We'll look at the other types of cones in a minute.
 
 If you reload your page right now you'll get a nasty error. 
 
-``username is not defined``
+``title is not defined``
 
-That's because we've left a space for username but haven't told the renderer what it is yet. We do that in the route when we render the template. Open app.js again and make the following change:
+That's because we've left a space for title but haven't told the renderer what it is yet. We do that in the controller when we render the template. Open posts again and make the following change:
 
 ```javascript
-app.get("/" , function(req,res){
+function indexPost(req , res) {
 
-  res.render("index" , {username: "Steveyblam"});
+  res.render("posts/index" , {title: "Posts" });
 
-});
+}
 ```
 
 The second argument to the render method is an object that contains all the info that needs to be "plugged in" to the template. You can put as much or as little data in here as you like. But you have to fill ***every*** placeholder in the template. If you miss one you'll get an error.
 
 Reload your page and take a look now.
 
-You may, rightly, be thinking that this still isn't very dynamic but in the future we'll be changing where we get the username or other data from at this stage. We could load it from a database, or from an API etc.
+> EXERCISE ( 20 Mins ) : Create a template for the Show route. Grab the post that matches the params.id from the posts array and pass it in to the template. Render the information from the post object. Each page should have a heading, a <p> tag with the body and an edit link. Look at the link on the index page for an example.
 
-> EXERCISE ( 10 Mins ) : Add another placeholder to your template and make sure the render method has the data it needs to render it.
+Your show controller should look like this:
+
+```javascript
+// SHOW - GET /:id
+function showPost(req , res) {
+
+  res.render("posts/show" , {
+    title: "Post",
+    post: posts[req.params.id]
+  });
+
+}
+```
+
+And the template like this:
+
+```html
+<h1><%= post.title %></h1>
+<p><%= post.body %></p>
+<a href="/<%= post.id %>/edit">edit</a>
+```
 
 ### Loops
 
@@ -169,43 +219,38 @@ This is where our second tag comes in. EJS will allow us to run code in the temp
 
 A few things to notice here. Firstly, no equals sign this time. This standard ice cream cone is the "evaluation" tag. It allows you to run standard javascript functions to help render your template!
 
-Secondly, notice that if we took out all the cones it would just be a simple javascript loop through an array called posts ( so we'll need to put that in to a data ).
+Secondly, notice that if we took out all the cones it would just be a simple javascript loop through our posts array.
 
-So why are we opening and closing the cones? Well the space in the middle is where we would print out whatever we want from the loop. So the cones essentially break us out and bring us back to the HTML.
+So why are we opening and closing the cones? Well, the space in the middle is where we would print out whatever we want from the loop. So the cones essentially break us out and bring us back to the HTML.
 
-Let's add some more bits:
+And let's add some more bits to our template:
 
 ```html
 <% for(var i = 0; i < posts.length; i++ ) { %>
-	<h3><%= posts[i].title %></h3>
+	<h3><a href="/<%= posts[i].id %>"><%= posts[i].title %></a></h3>
 <% } %>
 ``` 
 
 Notice it's just basic HTML inside the loop. But we're back to our equals sign cones again to print out the title from our post.
 
-Let's put some posts in the render data to see if this works:
+We still need to pass in our posts array to our template in the posts controller:
 
 ```javascript
-res.render("index" , {
-      username: "Steveyblam", 
-      posts: [
-                {
-                  title: "Post 1",
-                  body: "Wow that jumped a notch"
-                },
-                {
-                  title: "Post 2",
-                  body: "But it's not too bad really"
-                },
-             ]
-});
+function indexPost(req , res) {
+
+  res.render("posts/index" , {
+  	title: "Posts",
+  	posts: posts
+  });
+
+}
 ```
 
-All we've done here is add in a posts array with a bunch of objects in it. If all goes to plan our template will loop through each one and print out the title.
+If all goes to plan our template will loop through each one and print out the title.
 
 Reload your page and see what you get.
 
-> EXERCISE ( 10 Mins ) : Try and add a <p> tag with the body data for each post to the template.
+> EXERCISE ( 5 Mins ) : Add an extra field for each post that display the body in a <p> tag.
 
 You should have something like this:
 
@@ -242,7 +287,8 @@ Let's pull the navigation area out of our index template and put it in the navig
 
 ```html
 <nav>
-  Welcome back, <%= username %>
+	  <a href="/">Posts</a>
+	  <a href="/new">New Post</a>
 </nav>
 ```
 
@@ -312,8 +358,6 @@ Now we should pull all the HTML that's common to all our views in to this file. 
 
 We've introduced a new tag here called body. Notice it has a minus in the cones not an equal sign. This is where the whole of our rendered template will be plugged in.
 
-Notice also that we've made the title tag dynamic too. So we'll need a value for title each time we render.
-
 Let's now remove everything from our index.ejs file that isn't now in the layout. It should now only contain this:
 
 ```html
@@ -327,30 +371,12 @@ Let's now remove everything from our index.ejs file that isn't now in the layout
 <% } %>
 ```
 
-We need to add the title to our data in our route as we made it dynamic:
-
-```javascript
- res.render("index" , {
- 	   title: "Homepage", 
-      username: "Steveyblam", 
-      posts: [
-                {
-                  title: "Post 1",
-                  body: "Wow that jumped a notch"
-                },
-                {
-                  title: "Post 2",
-                  body: "But it's not too bad really"
-                },
-             ]
-  });
-```
 
 EJS will now combine our layout with our template and all the variables and render the page for us.
 
-> EXERCISE ( 15 Minutes ) : Create another template and route for an about us page. The page should have a heading and some text describing what we've built.
+> EXERCISE ( 10 Minutes ) : Create two more templates. One for the NEW route and the EDIT route. Make the controller functions render the templates. For the moment they should just contain an <h1> tag that says Edit or New.
 
-
+We'll implement these fully in the next lesson.
  
 ## Summary
 
@@ -361,6 +387,7 @@ You just:
 * Saw that we can run code in the templates to create loops
 * Saw how to split commonly used template parts in to partials
 * Saw how to create a layout that is used by all templates for their shared parts
+* Created the INDEX and SHOW routes
 
 
 
@@ -396,3 +423,4 @@ You just:
 
 
 
+l
