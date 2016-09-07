@@ -416,7 +416,7 @@ Your form should look like this:
 </form> 
 ```
 
-And your controller should like this. Remember process over code!:
+And your controller should like this. Remember, the process is more important than the code!:
 
 ```javascript
 function deletePost(req , res) {
