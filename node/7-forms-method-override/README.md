@@ -19,16 +19,19 @@ This lesson should take between 60 and 90 minutes to complete.
 * Creating a new object
 * Editing
 * Updating
+* Deleting
 
 In the templating lesson we implemented the first two of our seven restful routes. INDEX and SHOW.
 
-We're now going to implement four more. These four routes are actually two pairs of routes that work together.
+We're now going to implement the last 5. Four of these routes are actually two pairs of routes that work together.
 
 NEW - Displays a form that allows users to create a new post
 CREATE - Recieves the data from the NEW form and saves the data
 
 EDIT - Displays a form that allows users to edit an existing post
 UPDATE - Recieves the data from the EDIT form and updates the data
+
+And the final one is the DELETE route.
 
 To do this we'll need to do learn two new things. Firstly how to get access the data that we've sent from a form and secondly how to handle the fact that forms can only send GET and POST requests. We need them to send PUT as well for our update route.
 
@@ -390,6 +393,44 @@ Hopefully you'll see that code is very similar to things we've done already. We'
   res.redirect("/");
 ```
 
+## Deleting
+
+Now that all this is in place the final route is easy. To delete a post we need to send a DELETE request. Without method override we wouldn't have been able to do this. We can use a form to do it now.
+
+We could put our delete links anywhere in our application that makes sense. We're going to put them on the show page for each post because it looks nice.
+
+A DELETE route looks like this:
+
+``DELETE "/:id"``
+
+So we need a form with a post ID in the path, a DELETE verb and a submit button. We can do all of these things the same way we did with the edit form.
+
+> QUESTION ( 10 Minutes ) : Try to create a form that will send this request in the SHOW template. If you're feeling brave try to update the delete controller as well to remove the correct post from the array.
+
+Your form should look like this:
+
+```html
+<form action="/<%= post.id %>" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" value="Delete">
+</form> 
+```
+
+And your controller should like this. Remember process over code!:
+
+```javascript
+function deletePost(req , res) {
+
+  // tell the data store to remove the post with the id in the request
+  posts.splice(req.params.id , 1);
+  
+  // redirect to a GET request
+  res.redirect("/");
+  
+}
+```
+
+That's it! all seven restful routes!
 
 ## Summary
 
@@ -400,6 +441,7 @@ You just:
 * Created the NEW/CREATE and EDIT/UPDATE routes
 * Saw the patterns for creating and updating data
 * Saw how to use method override to make up for Verbs missing from forms
+* Implemented a delete route using a form
 
 
 

@@ -4,4 +4,9 @@
 
 <a href="/<%= post.id %>/edit">edit</a>
 
+<form action="/<%= post.id %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete">
+</form> 
+
 

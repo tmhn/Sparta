@@ -68,8 +68,12 @@ function newPost(req , res) {
 // DELETE - DELETE /:id
 function deletePost(req , res) {
 
-  res.send("DELETE");
-
+  // tell the data store to remove the post with the id in the request
+  posts.splice(req.params.id , 1);
+  
+  // redirect to a GET request
+  res.redirect("/");
+  
 }
 
 // UPDATE - UPDATE /:id
