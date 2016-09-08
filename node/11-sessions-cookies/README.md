@@ -9,7 +9,10 @@ This lesson should take between 60 and 90 minutes to complete.
 
 ## This lesson covers
 
-* Sessions and Cookies
+* The uses of Sessions and Cookies
+* Cookies
+* Sessions
+* Flash Messages
 
 Sessions and cookies allow us to temporarily store simple data for use in our app. We could, as you've seen, use a database for doing this. But that would be overkill. Sessions and cookies are better suited to storing temporary, simple data about how your user is currently using your application.
 
@@ -26,7 +29,7 @@ You've probably seen a lot of messages about cookies when browsing the web. The 
 
 Cookies are extremely simple key-value pair stores. They can also have an expiration date. Which makes them great for storing whether a user is logged in or not amongst other things.
 
-A server is only allowed to read cookies that it created. But they're still not very secure so the rule of thumb is this. Don't store anything in a cookie that you wouldn't want everyone to see.
+A server is only allowed to read cookies that it created. But they're still not very secure so the rule of thumb is this: Don't store anything in a cookie that you wouldn't want everyone to see.
 
 Let's add support for cookies to our app:
 
@@ -45,7 +48,7 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 ```
 
-That's all we need. Our app can now read and set cookies on the user's browser. Let's try and set a simple cookie. Let's create some middleware to track a users page views. In the app.js add the follwing before your routes:
+That's all we need. Our app can now read and set cookies on the user's browser. Let's try and set a simple cookie. We'll create some middleware to track a users page views. In the app.js add the follwing before your routes:
 
 ```javascript
 // track page views
@@ -103,7 +106,9 @@ app.use(function (req , res, next) {
 
 Sessions can actually be stored in any one of a number of different session storage engines, which are basically simple,fast databases. They are different from cookies in that the data is stored on the server not the user's browser. 
 
-For this reason session data is a little more secure. But still not entirely so. It is also really only intended to be used for simple data that is needed frequently. Because sessions also have an expiration don't store anything in there that you wouldn't want to lose.
+> NOTE: Our sessions package comes with a basic session storage system by default. But it's not something we would want to use on a production site.
+
+For this reason session data is a little more secure. But still not entirely so. It is also really only intended to be used for simple data that is needed frequently. Because sessions also have an expiration, don't store anything in there that you wouldn't want to lose.
 
 Sessions use cookies too. They store an id on the user's browser which tells the server which session to look up.
 
@@ -133,7 +138,7 @@ And that's it. We now have a req.session object to work with. The extra options 
 * saveUnitiliazed - should new sessions be saved even if they're empty
 * secret - the key to use for encrypting our session data. Like a password
 
-Our previous page counter was all well and good but using a cookie to store this info is exactly perfect. The user can mess with the data for a start. Let's change it to use the session instead:
+Our previous page counter was all well and good but using a cookie to store this info isn't exactly ideal. The user can mess with the data for a start. Let's change it to use the session instead:
 
 ```javascript
 app.use(function (req , res, next) {
@@ -165,11 +170,11 @@ You can store pretty much any json object ( minus the methods ) in the session. 
 
 ## Flash messages
 
-In a few of our routes we finish the action and then redirect to a different route. This makes it pretty hard to show the user a message about what went wrong.
+In a few of our routes we finish an action and then redirect to a different route. This makes it pretty hard to show the user a message about anything that went wrong.
 
 If there is an error with a save it would be nice to send the user back to the form with a message about what went wrong.
 
-We could put this message in the session and grab it in the next request but there are packages that handle this particular use case for us. 
+We could put this message in the session and grab it in the next request but there are packages that handle this particular use case a little better than that. 
 
 This pattern is called flash messaging. It uses the session to maintain a list of messages and removes them from the list as soon as they have been dsplayed. 
 
@@ -189,7 +194,7 @@ var flash = require('connect-flash');
 app.use(flash());
 ```
 
-Now that that's setup we have a flash() method available on req. This will push messages on to a stack that we can retrieve and display layer.
+Now that that's setup we have a flash() method available on req. This will push messages on to a stack that we can retrieve and display later.
 
 Let's replace all our error checking in our controller with flash messages for the CREATE route:
 
@@ -197,7 +202,7 @@ Let's replace all our error checking in our controller with flash messages for t
 // ask mongoose to save the data for us and wait for the response
   Post.create( req.body , function(err, post){
   
-    // check for errors and return 500 if there was a problem
+    // check for errors and store a flash message if there was a problem
     if(err) req.flash('error' , err.message);
   
     // redirect the user to a GET route. We'll go back to the INDEX.
@@ -213,7 +218,7 @@ We'll also need to display our messages somewhere. It would be nice to be able t
 touch views/partials/messages.ejs
 ```
 
-Flash messages are a list so we'll need to loop through all of them and display every error that's available. Add the following to messages.ejs:
+Add the following to messages.ejs to display the errors:
 
 ```html
 <div id="messages">
