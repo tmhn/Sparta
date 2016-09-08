@@ -14,7 +14,9 @@ This lesson should take between 60 and 90 minutes to complete.
 * Where does frontend code fit in
 * The public folder
 
-In the foundation module we spent all our time learning how to write frontend javascript. We've spent the whole of this module writing javascript code for the backend. So how do the two mix together? It's actually pretty simple as long as you can keep a good grasp of what's being run where.
+Our app is working quite nicely so far. But it looks awful. It's time to fix that.
+
+In the foundation module we spent all our time learning how to write frontend html and javascript and including css. We've spent the whole of this module writing javascript code for the backend. So how do the two mix together? It's actually pretty simple as long as you can keep a good grasp of what's being run where.
 
 We're going to look at how to use all those files that we normally use in the frontend by getting our express to serve them up for us.
 
