@@ -13,25 +13,34 @@ This exercise should take approximately 45 minutes.
 Functions can:
 
 * take one or more arguments
-*  
 
-#### Feature 1
+### Rewrite your calculator using functions
 
-User should be able to enter two values to add together. The sum of the two values should be shown to the user. This should work for all numbers including decimals.
+There should be separate functions for:
 
-#### Feature 2
+* add
+* subtract
+* multiply
+* divide
+* raise to the power
+* square root
 
-User should be able to enter two values then choose between adding, diving, subtracting, or multiplying. The answer should be shown to the user.
+The whole program should be run using a single function called run.
 
-#### Feature 3
+There should be a function that presents the user with the calculator options. It should return their choice.
 
-Calculator should choose addition if the user leaves it blank.
+### Bonus
 
-#### Bonus
+Add extra functions to your calculator:
 
-Research the while loop. 
+* Return the largest of two numbers
+* Return the largest of three numbers
+* Return the number of words in a sentence
+* Return the longest word in a sentence
+* Return the number of a instances of a given word in a sentence
+* Return all words from a sentence that are longer than a given length
 
-User should be able to make more than one calculation or choose to quit the calculator
+
 
 
 
