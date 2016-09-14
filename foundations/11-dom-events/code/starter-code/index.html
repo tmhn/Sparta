@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Events</title>
+  <script type="text/javascript" src="index.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <h1>Listeners</h1>
+
+  <h3>Buttons</h3>
+  <button id="myButton">Click Me</button>
+
+  <h3>Forms</h3>
+  <form action="" method="get" id="myForm">
+
+    <label>First Name:</label>
+    <input type="text" name="firstname" id="firstname">
+
+    <input type="submit" value="Submit the form">
+  </form>
+
+  <h3>This</h3>
+
+  <input type="button" value="button1" id="button1" class="myButtons">
+  <input type="button" value="button2" id="button2" class="myButtons">
+  <input type="button" value="button3" id="button3" class="myButtons">
+  <input type="button" value="button4" id="button4" class="myButtons">
+
+  <h3>Bubbling and Capturing</h3>
+  <div id="div1">
+    div1
+      <div id="div2">
+      div2
+        <div id="div3">
+          div3
+        </div>
+      </div>
+  </div>
+
+</body>
+</html>
