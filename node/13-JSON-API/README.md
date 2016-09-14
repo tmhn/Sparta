@@ -82,6 +82,22 @@ var Post = require('../../models/post');
 
 You should now be able to start the app and navigate to "/api/posts". Because the controller is the same we will just see our HTML app for the moment.
 
+### Authentication
+
+We still have our middleware checking routes for a user object. We'll be authenticating differently with the API so let's alter it to not check the API routes as well as sessions. In the app.js:
+
+```javascript
+app.use(/^\/(?!sessions|api).*/, function(req, res, next) {
+  if (!req.user) {
+    res.redirect('/sessions/new');
+  } else {
+    next();
+  }
+});
+```
+
+We've just changed to "?!sessions|api" which means "sessions or api". So it will ignore both.
+
 
 ## Rendering
 

@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
+var User = require('./models/user');
 
 // add support for cookies
 app.use(cookieParser());
@@ -18,6 +19,36 @@ app.use(session({
   saveUninitialized: true,
   secret: 'spartasupersecretkey'
 }));
+
+// load logged in user
+app.use(function(req,res,next) {
+
+  // no user id? just move on
+  if(!req.session.user) {
+       res.locals.user = false;
+      next();
+  } else {
+
+    // load the user with the ID in the session
+    User.findById(req.session.user , function(err, user){
+
+      if(user) {
+        // add the user to the request object
+        req.user = user;
+        // add it to locals so we can use it in all templates
+        res.locals.user = user;
+      } else {
+        // couldn't find it... that's weird. clear the session
+        req.session.user = null;
+      }
+
+      next(err);
+
+    });
+
+  }
+  
+});
 
 // add flash messaging support
 app.use(flash());
@@ -49,19 +80,15 @@ app.use(function (req , res, next) {
    req.session.views = views;
    
    // move on to the next middleware
-   next()
+   next();
    
 }); 
 
 // connect to the database
 mongoose.connect('mongodb://localhost/posts');
 
-
-// parse application/x-www-form-urlencoded
+// body parser
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
-app.use(bodyParser.json());
 
 // method override
 app.use(methodOverride(function(req, res){
@@ -78,6 +105,15 @@ app.set('view engine' , 'ejs');
 
 // use express layouts middleware too
 app.use(layouts);
+
+// check for login on all routes except sessions and api
+app.use(/^\/(?!sessions|api).*/, function(req, res, next) {
+  if (!req.user) {
+    res.redirect('/sessions/new');
+  } else {
+    next();
+  }
+});
 
 // add the router last
 app.use(routes);
