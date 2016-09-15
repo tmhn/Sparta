@@ -1,337 +1,95 @@
-# Creating a JSON API
+# Intro to single page applications
 
 ## Timings
 
-This lesson should take between 60 and 90 minutes to complete.
+This lesson should take between 20 and 30 minutes to complete.
 
 ## Pre-requisites
-* Mongoose Models
-* Controller
+
+* REST APIs
 
 ## This lesson covers
 
-* HTML App vs JSON API
-* API Controller
-* The routes
-* Rendering
-* Request data
-* Redirects and errors
+* What are single page applications
+* Why build an SPA
+* Frontend Frameworks and APIs
 
-Because we've done such a good job of separating our code into reusable files and objects, turning our HTML app in to a JSON API should be pretty straight forward.
+Building applications usually involves the same steps:
 
-The only differences between the two are:
+	* Handle a request ( routing and controllers )
+	* Get some data ( models and databases )
+	* Render the data ( templates )
 
-* The HTML app return HTML. The JSON API will return JSON
-* We don't need templates and renderers for the JSON API. We just return JSON
-* We don't redirect in the API. All routes return a response themselves.
-* The HTML app expected data to be sent from a form. The JSON API will expect JSON
+In this module we've been building server side applications using node and express. The reason we call it a server side app is because the code on the server handles all the steps above before sending back some HTML for the browser to display.
 
-That's it. We'll setup our app to run as an HTML app and a JSON API at the same time. Let's begin:
+A Single Page Application is one in which we've shifted some of those responsibilities to the client side ( frontend ). Actually we will be shifting pretty much all of them.
 
-## API Controller
+Our routing, controllers and views will now all be handled with javascript code on the frontend.
 
-We only have a few parts to change or add but first let's make a new folder just for API controllers and create a copy of our original controller that will just run the API. 
+The only step that the server will handle is managing the data. I.e the models. 
 
-```bash
-mkdir controllers/api
-cp controllers/posts.js controllers/api/posts.js
-```
+The server side is left with just one route to render. The starting page for our app. After that the client side code takes over handling any requests and rendering the changes.
 
-## The routes
+This why they are called Single Page Applications.
 
-Our API can't have on the same routes as the HTML app. One of them would lose that fight. 
 
-We could change routes to our API entirely but we might as well just add "/api/posts" to the front of all the routes for the API. Much quicker and very easy to do. Open the config and add the following:
+## Why build an SPA
 
-```javascript
-var postsApiController = require('../controllers/api/posts');
+SPAs are very popular. There are some great reasons to build your app this way. Although, as always, they aren't right for ***every*** case. Here are some good reasons to use one.
 
-...
+### Computing power
 
-// API section
-router.route('/api/posts')
-      .get(postsApiController.index)
-      .post(postsApiController.create);
+Code run on the server requires processing power. Which costs money. Especially if your app takes off! There's no real reason why the controllers, views and routing need to be on the server so let's get the user's browser to process it.
 
-router.route('/api/posts/:id')
-      .get(postsApiController.show)
-      .put(postsApiController.update)
-      .delete(postsApiController.delete);
-```
+### UX
 
-We've pulled in our new controller and created some new routes that point to it.
+Loading web pages is boring and slow. The whole page needs to be sent. Even bits that were the same on the previous page like headers and footers. And you have an ugly blank screen in the meantime. Especially if the connection is a bit slow ( think mobile apps ).
 
-So we end up with the following new routes for the API:
+By getting the frontend javascript to change the page we never leave the current one. We just tweak it. We can show the user some nice loading icons while they're waiting for data and we don't constantly resend things that have already been sent. 
 
-* /api/posts GET - INDEX
-* /api/posts POST - CREATE
-* /api/posts/:id GET - SHOW
-* Etc
+### Reusability
 
-> QUESTION ( 5 Minutes ) : Which routes are missing? Why?
+By separating out the delivery of data we can build multiple applications that use the same API. We can make it possible for third party developers to tie in to our data and lots more!
 
-We don't need the NEW and EDIT forms any more because they are used in a browser for choosing which data to send. We won't be making requests to our API from a browser so they aren't needed. 
+## Frontend Frameworks and APIs
 
-Our API controller is now totally separate from our HTML controller and won't interfere with the routes.
+To go from the app we have now to an SPA takes a few steps.
 
-Before we can test it we just need to tweak one thing. Because our controller is in a new directory our Post model require path will be wrong. It needs to go down one more directory. Open the API controller and change to the following at the top:
+### Create a JSON API
 
-```javascript
-var Post = require('../../models/post');
-```
+We need to make our data available to the frontend app. Luckily just a few tweaks to what we've already got will turn it in to an API that responds to and returns JSON.
 
-You should now be able to start the app and navigate to "/api/posts". Because the controller is the same we will just see our HTML app for the moment.
+### New Authentication Method
 
+APIs aren't supposed to remember states ( this means logins, sessions cookies etc ). So we'll need a new way to authenticate ourselves to the app from the frontend.
 
-## Rendering
+A user "logs in" by requesting a token from the api based on their user credentials. That token then gets sent with every request to prove who you are.
 
-The next thing that we need to change is how the controller renders a response. The HTML app uses EJS to render HTML and returns that. We just want to return JSON from our API.
+We'll be looking at using JWT Tokens for this.
 
-Luckily, the data returned by our model is still perfectly fine to use, and because it is already in JSON format ( thank you mongoose! ) we just need to tell the controller to render it as JSON. For that we can use the ``res.json()`` method.
+### Move Routing, Controllers and Views to the frontend
 
-Open the api posts controller and change the index function to the following:
+There are many frameworks that are great for handling this sort of thing. Angular and React are arguably two of the most popoular ones. 
 
-```javascript
-// INDEX - GET /
-function indexPost(req , res) {
+We're going to use basic jQuery to recreate our blog app as an SPA and then we'll look at React in the next module.
 
-  // get the model to load all the posts. wait for data in the callback
-  Post.find({} , function(err, posts) {
+And that's it. Our app will load a single page after which any changes will be handled by API and frontend javascript.
 
-	  // check for errors and return 500 error and message if found
-	  if(err) return res.status(500).send(err);
-	
-	  // render the object as JSON
-	  res.json(posts);
+## Examples
 
-  });
+www.pivotaltracker.com is a great example of an SPA. Can you imagine using this platform if every action you took required a page refresh?
 
-}
-```
-
-The ***only*** line we changed is the one that renders the data. That's it. Load your page again. You should now get a json response. The JSON method will take whatever object ( or any other data type ) you give it and try to create a JSON response from it. It also sets the headers for the response to tell the requester that it's getting JSON back. Easy.
-
-But we're not done yet.
-
-> EXERCISE (5 Minutes) : Change the SHOW method to render JSON. You can also remove the EDIT and NEW functions now too.
-
-Your SHOW controller function should look like this:
-
-```javascript
-function showPost(req , res) {
-
-  Post.findById(req.params.id , function(err, post) {
-    
-    
-      // check for errors or for no object found
-      if(!post) return res.status(404).send("Not found");
-      if(err) return res.status(500).send(err);
-  
-     // render the object as JSON
-     res.json(post);
-  
-  
-  });
-
-}
-``` 
-
-## Request data
-
-Open the app.js and find the following line that includes the body parser:
-
-```javascript
-// body parser
-app.use(bodyParser.urlencoded({ extended: false }));
-```
-
-Let's remind ourselves what the body parser does. 
-
-The body parser looks in the request for data that was sent from a form then packages and sorts it in to a nice JSON object. We can then access it through ``req.body`` inside our middleware and routes.
-
-Most of the time our API won't be sent data from a form. We want to be able to send JSON to the API and have it use that. 
-
-To make body parser also look for JSON in the request and make that available to us just takes one more line: 
-
-```javascript
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
-app.use(bodyParser.json());
-```
-
-It can even handle looking for form data ***and*** JSON at the same time, only using whichever it finds. So it won't even break our HTML app.
-
-To test this we need to open Postman and send a request that has JSON in the body. 
-
-In the url field type 'http://localhost:3000/api/posts' and set the verb to POST.
-
-We'll be trying to create a new post object. So we need a json object that will represent the data that we need:
-	
-	* Open the "body" tab 
-	* Select "raw" as the encoding type.
-	* Then choose "application/json" from the drop down list.
-	* Paste the following json in to the body area
-
-```javascript
-{
-	
-	"title": "My JSON",
-	"body": "This post was created from JSON sent from Postman",
-	"rating": 5
-	
-}
-```
-
-If the request is successful you'll be redirected back to the HTML app index page. 
-
-That's not where we want to be. So we have a few more changes to make.
-
-## Redirects and errors
-
-We don't usually redirect in a JSON API. It's perfectly acceptable to return a blank screen with just a status code or to return the JSON object that was created etc.
-
-We also don't want to put our errors in the flash session. They need a proper status code and an error message rendered as JSON.
-
-We have three routes that need updating:
-
-#### CREATE
-
-When we create a new post in our API it's standard practise to return the new object so let's do that and change the error response too:
-
-```javascript
-function createPost(req , res) {
-
-  // data is gathered by body parser and placed in req.body
-
-  // ask mongoose to save the data for us and wait for the response
-  Post.create( req.body , function(err, post){
-  
-    // check for errors and return 500 if there was a problem
-    if(err) res.status(500).json({error: err.message});
-  
-    // return the object
-  	 res.json(post);
-  
-  });
-
-}
-```
-
-Try your CREATE request again. This time you should get the new post returned as a JSON object.
-
-#### UPDATE
-
-Just like creating we would normally return the newly updated object instead of redirecting. The error checking will be the same as above:
-
-```javascript
-function updatePost(req , res) {
-
-    // data is gathered by body parser and placed in req.body
-    
-    // load, bind and save all in one hit
-    Post.findByIdAndUpdate( 
-        req.params.id, 
-        { $set:  req.body }, 
-        { runValidators: true }, 
-        function(err , post){
-      
-          // check for errors and return 500 if there was a problem
-          if(err) res.status(500).json({error: err.message});
-          
-          // return the object
-          res.json(post);
-    
-        }
-    );
-
-}
-```
-
-We need to test this:
-
-* Grab an ID from one of your posts and add it to the URL. 
-* Set the verb to PUT
-* Paste in the original JSON for your post in to the body section.
-* Make a change to one of the fields
-* Send the request
-
-The UPDATE controller should now return the updated post as json. But it doesn't. It returns the original unchanged post. Hmmm.
-
-Try sending the same request again. This time it should return the new version. 
-
-This is a very strange quirk of Mongoose.
-
-**When updating an object with Mongoose it performs the save, but returns the original, unchanged object to your callback**
-
-So your post did save the first time round. But you returned the old one in the response. We need to tell mongoose to return the ***updated*** version. We do this with an option in the config object.
-
-```
-function updatePost(req , res) {
-
-    // data is gathered by body parser and placed in req.body
-    
-    // load, bind and save all in one hit
-    Post.findByIdAndUpdate( 
-        req.params.id, 
-        { $set:  req.body }, 
-        { runValidators: true, new:true }, // true returns the new doc
-        function(err , post){
-      
-          // check for errors and return 500 if there was a problem
-          if(err) res.status(500).json({error: err.message});
-          
-          // return the object
-          res.json(post);
-    
-        }
-    );
-
-}
-```
-
-> NOTE : "new" defaults to false in Mongoose. In Mongoose 4 it has, apparently, been changed to true by default. So this might not be a problem for much longer.
-
-If you run your test again now you should see the newly updated post each time.
-
-
-#### DELETE
-
-We really just want to tell the user whether the DELETE request was successful or not. We can do this with status codes, usually 200 or 204. No need to render anything. Change the delete function to the following:
-
-```javascript
-// DELETE - DELETE /:id
-function deletePost(req , res) {
-
-  // tell the data store to remove the post with the id in the request
-  Post.findByIdAndRemove(req.params.id , function(err) {
-  
-      // check for errors and return 500 if there was a problem
-      if(err) res.status(500).json({error: err.message});
-  
-      // redirect to a GET request
-      res.status(204).json(); // 204 - no content
-  
-  });
-  
-}
-```
-
-You can test this in much the same way as the UPDATE route. Notice that you're response body is empty and the status code will be 204. Any app or package that's using our API will be content with just the status code.
-
-That's it. We've changed all our routes to act as an API. We reused our models and most of our controller code and routing too.
-
+facebook is also an SPA. Liking and sharing take place without a page reload. And as you scroll down the page your news feed loads more content. 
 
 ## Summary
 
 You just:
 
-	* Created a new controller and route just for the API
-	* Used res.json to render JSON instead of HTML
-	* Return JSON encoded errors instead of using the flash session
-	* Saw that each route must now return it's own response. No redirects
-	* Saw that mongoose returns the old object when updating and how to fix it
+	* learned that an SPA is an app where everything but the data is handled by frontend code
+	* Saw some of the reasons why you would create your app as an SPA
+	* Saw how we'll change our app in to an SPA
+
+
 
 	
 	
