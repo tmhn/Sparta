@@ -171,21 +171,41 @@ We can also work in a more RDBMS way by giving your document the IDs of all the 
 
 Mongoose handles it relationships in the Schemas. We have two schemas to work with User and Post.
 
-### Embed
+### References
 
-We'll try to create each of the three types of relationship above using embedding.
+In our app the posts are loaded and viewed independently of the the users. So it's a good example of when referencing might be a better way to create an association.
 
-#### OneToOne
-
-We might use a OneToOne relationship if we were building a coursework submission system. One user can have one and only one Submission ( Post ) and vice versa.
+To create an association we simply pass one schema in to the other and mongoose does the rest.
 
 Open the User model and we'll add our relationship to the schema:
+
+```javascript
+var mongoose = require('mongoose');
+
+// get a reference to the mongoose Schema type
+var Schema = mongoose.Schema;
+
+var UserSchema = new mongoose.Schema({
+
+  first_name : {type: String, required:true},
+  last_name : {type: String, required:true},
+  email : {type: String, required:true},
+  password : {type: String, required:true},
+  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+
+});
+
+module.exports = mongoose.model('User' , UserSchema);
+```
+
+The schema has special syntax. The posts line tells mongoose that there will be an array of ObjectIds. The ref tells mongoose which Model type it should point to.
+
+Let's create the opposite reference for the posts object:
 
 ```javascript
 
 
 ```
-
 
 
 ### Reference

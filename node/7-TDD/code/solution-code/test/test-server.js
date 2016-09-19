@@ -1,6 +1,6 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../app');
+var app = require('../app');
 var should = chai.should();
 var expect    = require('chai').expect;
 
@@ -14,7 +14,7 @@ describe('Posts', function() {
   it('should list ALL posts on / GET', function(done) {
         
         // create a request manager that uses our app
-        var request = chai.request(server);
+        var request = chai.request(app);
         
         // send a request
         request
@@ -35,7 +35,7 @@ describe('Posts', function() {
 
   // describe a test for SHOW
   it('should list a SINGLE post on /<id> GET', function(done) {
-    chai.request(server)
+    chai.request(app)
       .get('/0')
       .end(function(err, res){
         res.should.have.status(200);
@@ -51,7 +51,7 @@ describe('Posts', function() {
 
   // describe a test for POST
   it('should add a SINGLE post on / POST' , function(done){
-      var request = chai.request(server);
+      var request = chai.request(app);
 
       request.post('/')
           .set('content-type', 'application/x-www-form-urlencoded') // set the form encoding type
@@ -86,7 +86,7 @@ describe('Posts', function() {
   // describe a test for PUT
   it('should update a SINGLE post on /<id> PUT' , function(done){
 
-    var request = chai.request(server);
+    var request = chai.request(app);
 
     request.put('/2')
         .set('content-type', 'application/x-www-form-urlencoded')
@@ -116,7 +116,7 @@ describe('Posts', function() {
 
   it('should delete a SINGLE post on /<id> DELETE' , function(done) {
 
-    var request = chai.request(server);
+    var request = chai.request(app);
 
     request.delete('/3')
         .end(function(err, res){
