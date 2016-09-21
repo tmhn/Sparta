@@ -198,7 +198,7 @@ var UserSchema = new mongoose.Schema({
 module.exports = mongoose.model('User' , UserSchema);
 ```
 
-The schema has special syntax. The posts line tells mongoose that there will be an array of ObjectIds. The ref tells mongoose which Model type it should point to.
+The schema has special syntax. The posts line tells mongoose that there will be an array of ObjectIds. The ref tells mongoose which Model it should point to.
 
 Let's create the opposite reference for the posts object:
 
