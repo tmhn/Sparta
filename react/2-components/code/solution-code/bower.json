@@ -1,0 +1,20 @@
+{
+  "name": "solution-code",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Stephen Reid <steveyblam@hotmail.co.uk>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/steveyblam/Sparta",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.3.2"
+  }
+}
