@@ -12,6 +12,10 @@ This lesson should take between 30 and 50 minutes to complete.
 
 * What is react
 * Installation
+* Webpack
+* Babel
+* Gotchas
+* ES6
 
 
 React is not so much a framework as it is a UI library. It is a collection of functions and object that will help you to create reusable UI components. So far we've built some fairly complex layouts using node and express. As the views of our apps got to be more complex we started to use partials and layouts to make things more modular and reusable. This is exactly what React does but it takes reusability to a completely new level.
@@ -268,6 +272,30 @@ There are a few more of these gotchas and you can view them [here](https://faceb
 
 Now that we can build with React and JSX we can move on to the cooler features.
 
+## ES6
+
+Through this whole course we've been learning the current version of javascript but there is a new one coming. ECMA6 adds a lot of new features ( including support for classes ). 
+
+ECMA6 has support in many modern browsers but not all. Because we're using webpack and babel to translate our JSX in to ECMA5 we can also use it to translate from ECMA6 and JSX at the same time back down to ECMA5. This means it can be used everywhere.
+
+We won't be writing in ECMA6 for this module but you may see it in examples you find on the web so don't be surprised when you see something like this:
+
+```javascript
+
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <p> Hello React!</p>
+        <AwesomeComponent />
+      </div>
+    );
+  }
+}
+```
+
+It's not hugely different. But we can't use it yet. So don't get it confused!
+
 ## Summary
 
 You just:
@@ -278,6 +306,7 @@ You just:
 	* Found that JSX isn't supported by most browsers and needs to be "translated"
 	* Saw how to set up webpack and babel to translate JSX
 	* Rendered a simple header using React and ReactDOM
+	* Had a brief intro to ECMA6
 
 	
 
