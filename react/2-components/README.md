@@ -296,16 +296,18 @@ Inside the TweetList component we can access the array by calling this.props.twe
 ```javascript
 var TweetList = React.createClass({
 
+
   render: function() {
+  
+  	 var list = this.props.tweets.map(function(tweet, i){
+		return (
+			<Tweet key={i}/>
+		)
+	 });
+  
     return (
       <div className="tweets">
-      	 {
-        	this.props.tweets.map(function(tweet, i){
-        		return (
-        			<Tweet key={i}/>
-        		)
-        	})
-        }
+      	 {list}
       </div>
     )
   }
@@ -337,15 +339,16 @@ The final step is to get the data for each tweet in to the <Tweet /> tags. We ca
 var TweetList = React.createClass({
 
   render: function() {
+  
+  	 var list = this.props.tweets.map(function(tweet, i){
+		return (
+			<Tweet key={i} message={tweet.message} author={tweet.author}/>
+		)
+	 });
+  
     return (
       <div className="tweets">
-      	 {
-        	this.props.tweets.map(function(tweet, i){
-        		return (
-        			<Tweet message={tweet.message} author={tweet.author} key={i} />
-        		)
-        	})
-        }
+      	 {list}
       </div>
     )
   }

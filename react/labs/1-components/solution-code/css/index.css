@@ -1,0 +1,93 @@
+* {
+
+  font-family: 'Raleway', sans-serif;
+
+}
+
+#container {
+
+  padding:100px;
+  width:50%;
+  margin-left:auto;
+  margin-right:auto;
+
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+}
+
+.new_tweet {
+
+  margin-bottom:30px;
+
+}
+
+.new_tweet input[type=text] {
+
+  width:400px;
+  padding:15px;
+  border:0px;
+  border-bottom:1px solid #CA907E;
+  margin-bottom:5px;
+  font-size:20px;
+
+}
+
+.new_tweet input[type="button"] {
+
+    width:100px;
+    margin-left:15px;
+    padding:15px;
+    background-color: #CA907E;
+    color:#994636;
+    border:0px;
+    border-radius:5px;
+
+}
+
+.characterCount {
+
+  
+  
+}
+
+.tweets {
+
+  width:100%;
+  text-align:left;
+
+}
+
+.tweet {
+
+  margin-bottom:10px;
+
+}
+
+.tweet .message {
+
+  font-size:20px;
+
+}
+
+.tweet .author {
+
+  font-size:10px;
+  color:#994636;
+
+}
+
+.tweet .profile_pic {
+
+  width:50px;
+  height:50px;
+  border-radius:50px;
+  background-size:cover;
+  background-position:center;
+
+}

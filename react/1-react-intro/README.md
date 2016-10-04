@@ -41,7 +41,7 @@ The react directory in bower_components contains a few files but for the moment 
 
 Including these two files has given us access to two new objects; React and ReactDOM. React is used for creating elements and components and ReactDOM is used for rendering them to the DOM.
 
-Our javascript file looks for an element called "container", creates an <h1> element then appends it to the container. Pretty basic.
+Our javascript file looks for an element called "container", creates an <h1></h1> element then appends it to the container. Pretty basic.
 
 The same thing in React looks like the following. Change the index.js to:
 
@@ -150,7 +150,7 @@ Babel has become the recommended JSX translator. There are a few others and you 
 Let's install babel and get webpack to use it to translate:
 
 ```bash
-npm install babel-loader babel-preset-es2015 babel-preset-react --save
+npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save
 ```
 
 There are three packages here. Babel loader is the base. It handles what type of translations will be done ( beacause babel can handle more than JSX ). 
