@@ -1,7 +1,8 @@
-var TwitterFeed = require('./twitterFeed.jsx');
+var Timer = require('./timer.jsx');
 
 
 ReactDOM.render(
-  <TwitterFeed />, 
+    <Timer />
+  , 
   document.getElementById('container')
 );

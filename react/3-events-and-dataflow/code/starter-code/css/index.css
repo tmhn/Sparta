@@ -10,68 +10,46 @@
   width:50%;
   margin-left:auto;
   margin-right:auto;
+  text-align:center;
 
 }
 
-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-family: 'Raleway', sans-serif;
-    outline: none;
-}
+.clock {
 
-.new_tweet {
-
-  margin-bottom:30px;
+  font-size:30px;
 
 }
 
-.new_tweet input[type=text] {
+.clock .ticker {
 
-  width:400px;
+  display:inline-block;
+  padding:10px;
+
+}
+
+.clock .separator {
+
+  display:inline-block;
+
+}
+
+.lap {
+
+  font-size:15px;
+
+}
+
+.lap .ticker {
+
+  display:inline-block;
   padding:15px;
-  border:0px;
-  border-bottom:1px solid #CA907E;
-  margin-bottom:5px;
-  font-size:20px;
 
 }
 
-.new_tweet input[type="button"] {
+.lap .separator {
 
-    width:100px;
-    margin-left:15px;
-    padding:15px;
-    background-color: #CA907E;
-    color:#994636;
-    border:0px;
-    border-radius:5px;
+  display:inline-block;
 
 }
 
-.tweets {
 
-  width:100%;
-  text-align:left;
-
-}
-
-.tweet {
-
-  margin-bottom:10px;
-
-}
-
-.tweet .message {
-
-  font-size:20px;
-
-}
-
-.tweet .author {
-
-  font-size:10px;
-  color:#994636;
-
-}

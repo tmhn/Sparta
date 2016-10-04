@@ -46,9 +46,9 @@
 
 	'use strict';
 
-	var TwitterFeed = __webpack_require__(1);
+	var Timer = __webpack_require__(1);
 
-	ReactDOM.render(React.createElement(TwitterFeed, null), document.getElementById('container'));
+	ReactDOM.render(React.createElement(Timer, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -56,112 +56,172 @@
 
 	'use strict';
 
-	var TweetForm = __webpack_require__(2);
-	var TweetList = __webpack_require__(3);
+	var Clock = __webpack_require__(2);
+	var Laps = __webpack_require__(3);
 
-	var dummyTweets = [{
-	  message: "React is great!",
-	  author: "@steveyblam"
-	}, {
-	  message: "React is ok!",
-	  author: "@steveybob"
-	}, {
-	  message: "React is rubbish!",
-	  author: "@spartan"
-	}];
+	var Timer = React.createClass({
+	  displayName: 'Timer',
 
-	var TwitterFeed = React.createClass({
-	  displayName: 'TwitterFeed',
+
+	  getInitialState: function getInitialState() {
+
+	    return {
+	      laps: []
+	    };
+	  },
+
+	  handleLap: function handleLap(lap) {
+	    this.state.laps.push(lap);
+	    this.setState({
+	      laps: this.state.laps
+	    });
+	  },
 
 	  render: function render() {
+
 	    return React.createElement(
 	      'div',
-	      { className: 'twitter_feed' },
-	      React.createElement(TweetForm, null),
-	      React.createElement(TweetList, { tweets: dummyTweets })
+	      { className: 'timer' },
+	      React.createElement(Clock, null),
+	      React.createElement(Laps, null)
 	    );
 	  }
+
 	});
 
-	module.exports = TwitterFeed;
+	module.exports = Timer;
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var TweetForm = React.createClass({
-	    displayName: "TweetForm",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            { className: "new_tweet" },
-	            React.createElement("input", { type: "text", id: "tweet_text", placeholder: "Write a message" }),
-	            React.createElement("input", { type: "button", value: "Tweet" })
-	        );
-	    }
-	});
-
-	module.exports = TweetForm;
-
-/***/ },
-/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Tweet = __webpack_require__(4);
+	var Laps = __webpack_require__(3);
 
-	var TweetList = React.createClass({
-	  displayName: "TweetList",
+	var Clock = React.createClass({
+	  displayName: "Clock",
 
 
-	  render: function render() {
-	    return React.createElement(
-	      "div",
-	      { className: "tweets" },
-	      this.props.tweets.map(function (tweet, i) {
-	        return React.createElement(Tweet, { message: tweet.message, author: tweet.author, key: i });
-	      })
-	    );
-	  }
+	  getInitialState: function getInitialState() {
 
-	});
-
-	module.exports = TweetList;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var Tweet = React.createClass({
-	  displayName: "Tweet",
-
+	    return {
+	      hours: 0,
+	      minutes: 0,
+	      seconds: 0
+	    };
+	  },
 
 	  render: function render() {
+
 	    return React.createElement(
 	      "div",
-	      { className: "tweet" },
+	      { className: "clock" },
 	      React.createElement(
 	        "div",
-	        { className: "message" },
-	        this.props.message
+	        { className: "clockface" },
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          this.state.hours
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "separator" },
+	          ":"
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          this.state.minutes
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "separator" },
+	          ":"
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          this.state.seconds
+	        )
 	      ),
 	      React.createElement(
 	        "div",
-	        { className: "author" },
-	        this.props.author
+	        { className: "controls" },
+	        React.createElement("input", { type: "button", value: "Lap", className: "lap_button" })
 	      )
 	    );
 	  }
 
 	});
 
-	module.exports = Tweet;
+	module.exports = Clock;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var Laps = React.createClass({
+	  displayName: "Laps",
+
+
+	  getDefaultProps: function getDefaultProps() {
+
+	    return {
+	      laps: []
+	    };
+	  },
+
+	  render: function render() {
+
+	    var laps = this.props.laps.map(function (lap, i) {
+
+	      return React.createElement(
+	        "div",
+	        { className: "lap", key: i },
+	        "#",
+	        i + 1,
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          lap.hours
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "separator" },
+	          ":"
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          lap.minutes
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "separator" },
+	          ":"
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "ticker" },
+	          lap.seconds
+	        )
+	      );
+	    });
+
+	    return React.createElement(
+	      "div",
+	      { className: "laps" },
+	      laps
+	    );
+	  }
+
+	});
+
+	module.exports = Laps;
 
 /***/ }
 /******/ ]);
