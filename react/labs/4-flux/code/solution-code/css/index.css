@@ -1,0 +1,36 @@
+* {
+
+  font-family: 'Raleway', sans-serif;
+
+}
+body {
+
+  padding:25px;
+}
+
+#product_list {
+
+  width:70%;
+  float:left;
+
+}
+
+#basket {
+
+  width:25%;
+  float:right;
+
+}
+
+
+.product {
+
+  margin-bottom:10px;
+
+}
+
+.product a {
+
+  font-size:10px;
+
+}

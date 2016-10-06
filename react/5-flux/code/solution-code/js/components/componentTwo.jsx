@@ -1,9 +1,25 @@
-var ComponentOne = React.createClass({
+var CountStore = require('../stores/countStore.js');
+
+var ComponentTwo = React.createClass({
+
+  componentDidMount: function() {
+
+    CountStore.on('update', this.handleDataChange);
+
+  },
+  
+  handleDataChange : function() {
+  
+    this.setState({
+      count: CountStore.getCount()
+    });
+  
+  },
 
   getInitialState: function() {
 
     return {
-      count: 0
+      count: CountStore.getCount()
     }
 
   },
@@ -20,4 +36,4 @@ var ComponentOne = React.createClass({
 
 });
 
-module.exports = ComponentOne;
+module.exports = ComponentTwo;

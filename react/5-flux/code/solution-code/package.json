@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "dependencies": {
     "flux": "^3.0.0",
+    "merge": "^1.2.0",
     "webpack": "^1.13.2"
   },
   "devDependencies": {},

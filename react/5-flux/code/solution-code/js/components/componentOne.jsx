@@ -1,8 +1,13 @@
+var appDispatcher = require('../dispatchers/appDispatcher.js');
+var appConstants = require('../constants/appConstants.js');
+
 var ComponentOne = React.createClass({
 
-  handleClick: function() {
+  handleClick: function(e) {
 
-    console.log('clicked');
+    appDispatcher.dispatch({
+      action: appConstants.CLICKED
+    });
 
   },
 
