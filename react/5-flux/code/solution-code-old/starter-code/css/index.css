@@ -1,0 +1,44 @@
+* {
+
+  font-family: 'Raleway', sans-serif;
+
+}
+
+#container {
+
+  padding:100px;
+  width:50%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+}
+
+.clicker {
+
+  margin-bottom:10px;
+
+}
+
+.clicker input {
+
+  background-color: #AABBCC;
+  border-radius:15px;
+  padding:20px;
+  border:0px;
+
+}
+
+.counter {
+
+  font-size:30px;
+
+}
